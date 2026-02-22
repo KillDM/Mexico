@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Masquerade Economy: Mexico Edition</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="papel-strip top" aria-hidden="true"></div>
+
+  <div id="gameScreen" class="game-screen">
+    <header class="stats-bar glass" aria-label="Game stats">
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">💰</span>
+        <div>
+          <p>Budget</p>
+          <h3 id="budgetValue" data-value="1000">$1,000</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">📈</span>
+        <div>
+          <p>Total Revenue</p>
+          <h3 id="revenueValue" data-value="0">$0</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">🎭</span>
+        <div>
+          <p>Appeal</p>
+          <h3 id="appealValue" data-value="36">36</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">🤝</span>
+        <div>
+          <p>Reputation</p>
+          <h3 id="reputationValue" data-value="38">38</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">👥</span>
+        <div>
+          <p>Attendance</p>
+          <h3 id="attendanceValue" data-value="300">300</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">🛠️</span>
+        <div>
+          <p>Jobs Created</p>
+          <h3 id="jobsValue" data-value="0">0</h3>
+        </div>
+      </div>
+
+      <div class="stat-card round">
+        <span class="stat-icon" aria-hidden="true">🗓️</span>
+        <div>
+          <p>Round</p>
+          <h3 id="roundValue">1/3</h3>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <section id="actionsSection" class="actions-panel glass" aria-label="Action cards">
+        <div class="actions-head">
+          <div>
+            <h1>Masquerade Economy: Mexico Edition</h1>
+            <p id="roundHint">Choose exactly one action card for Round 1.</p>
+          </div>
+          <div class="actions-head-controls">
+            <button id="detailsBtn" class="details-btn" aria-label="Open details drawer">Details</button>
+            <button id="confirmBtnDesktop" class="confirm-btn confirm-btn-desktop" aria-label="Confirm selected action">Confirm Round 1 Choice</button>
+          </div>
+        </div>
+
+        <div id="tabs" class="tabs" role="tablist" aria-label="Action categories"></div>
+        <div id="cardsGrid" class="cards-grid"></div>
+      </section>
+
+      <aside class="side-panel desktop-only" aria-label="Desktop details sidebar">
+        <section class="event-panel glass">
+          <h2>Event Card Reveal</h2>
+          <div id="eventRevealDesktop" class="event-reveal">
+            <div class="event-inner">
+              <div class="event-face event-front">
+                <p>Round Event</p>
+                <strong>?</strong>
+              </div>
+              <div class="event-face event-back">
+                <h3 id="eventTitleDesktop">Waiting for your move</h3>
+                <p id="eventDescDesktop">After you confirm an action, a random event will trigger.</p>
+                <p id="eventImpactDesktop" class="event-impact">No effect yet.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="log-panel glass">
+          <h2>Round Log</h2>
+          <ul id="roundLogDesktop" class="round-log">
+            <li class="empty">Your round history will appear here.</li>
+          </ul>
+        </section>
+
+        <section class="upgrades-panel glass">
+          <h2>Owned Upgrades</h2>
+          <ul id="upgradesListDesktop" class="upgrade-list"></ul>
+        </section>
+      </aside>
+    </main>
+
+    <div class="mobile-controls" aria-label="Primary round controls">
+      <button id="confirmBtn" class="confirm-btn" aria-label="Confirm selected action">Confirm Round 1 Choice</button>
+    </div>
+  </div>
+
+  <div id="detailsBackdrop" class="details-backdrop" hidden></div>
+  <section id="detailsSheet" class="details-sheet" aria-hidden="true" aria-label="Round details">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <h2>Details</h2>
+      <button id="closeDetailsBtn" class="close-sheet" aria-label="Close details drawer">Close</button>
+    </div>
+
+    <div class="sheet-content">
+      <section class="event-panel sheet-card">
+        <h3>Current Event</h3>
+        <div id="eventRevealMobile" class="event-reveal compact">
+          <div class="event-inner">
+            <div class="event-face event-front">
+              <p>Round Event</p>
+              <strong>?</strong>
+            </div>
+            <div class="event-face event-back">
+              <h3 id="eventTitleMobile">Waiting for your move</h3>
+              <p id="eventDescMobile">After you confirm an action, a random event will trigger.</p>
+              <p id="eventImpactMobile" class="event-impact">No effect yet.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="log-panel sheet-card">
+        <h3>Round Log</h3>
+        <ul id="roundLogMobile" class="round-log">
+          <li class="empty">Your round history will appear here.</li>
+        </ul>
+      </section>
+
+      <section class="upgrades-panel sheet-card">
+        <h3>Owned Upgrades</h3>
+        <ul id="upgradesListMobile" class="upgrade-list"></ul>
+      </section>
+    </div>
+  </section>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button id="navActionsBtn" class="nav-btn" aria-label="Jump to action cards">Actions</button>
+    <button id="navDetailsBtn" class="nav-btn" aria-label="Open details drawer">Details</button>
+    <button id="navResultsBtn" class="nav-btn" aria-label="Open results" disabled>Results</button>
+  </nav>
+
+  <section id="resultsScreen" class="results-screen" aria-hidden="true">
+    <div class="festival-report glass">
+      <h2>Festival Report</h2>
+      <p class="report-subtitle">Three rounds complete. Here is your economic and social impact.</p>
+
+      <div class="report-grid">
+        <div class="report-item">
+          <p>Total Spent</p>
+          <h3 id="reportSpent">$0</h3>
+        </div>
+        <div class="report-item">
+          <p>Total Revenue</p>
+          <h3 id="reportRevenue">$0</h3>
+        </div>
+        <div class="report-item">
+          <p>Net Impact</p>
+          <h3 id="reportNet">$0</h3>
+        </div>
+        <div class="report-item">
+          <p>Avg Attendance</p>
+          <h3 id="reportAttendance">0</h3>
+        </div>
+        <div class="report-item">
+          <p>Jobs Created</p>
+          <h3 id="reportJobs">0</h3>
+        </div>
+        <div class="report-item">
+          <p>Final Appeal / Reputation</p>
+          <h3 id="reportSocial">0 / 0</h3>
+        </div>
+      </div>
+
+      <div class="badges-wrap">
+        <h3>Badges</h3>
+        <div id="badges" class="badges"></div>
+      </div>
+
+      <div class="feedback-wrap">
+        <h3>Organizer Feedback</h3>
+        <ul id="feedbackList" class="feedback-list"></ul>
+      </div>
+
+      <button id="restartBtn" class="restart-btn" aria-label="Restart game">Play Again</button>
+    </div>
+
+    <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+  </section>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
